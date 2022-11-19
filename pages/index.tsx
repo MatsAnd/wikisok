@@ -32,7 +32,7 @@ export default function Home() {
           <Header />
         </Page.Header>
         <Page.Content>
-          <Text p>Her kan du søke etter noe spennende i Wikipedia - kanskje du finner noe spennende òg! 👇</Text>
+          <Text p>Her kan du søke etter noe spennende i Wikipedia -&nbsp;kanskje du finner noe spennende òg! 👇</Text>
           <Input 
             value={searchString}
             onChange={e => setSearchString(e.target.value)}
