@@ -38,6 +38,8 @@ export default function Home() {
             onChange={e => setSearchString(e.target.value)}
             placeholder="Tast inn søketerm her.." 
             clearable
+            scale={4/3}
+            style={{ fontSize: "16px" }}
             width="100%"
           />
            <Display width="100%">
