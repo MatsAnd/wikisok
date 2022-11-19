@@ -7,8 +7,6 @@ import { getSystemTheme } from '../lib/getSystemTheme'
 
 import type { AppProps } from 'next/app'
 
-import '../styles/globals.css'
-
 function App({ Component, pageProps }: AppProps) {
   const theme = useSelector(selectThemeState)
   const [systemTheme, setSystemTheme] = useState(THEME.LIGHT)
