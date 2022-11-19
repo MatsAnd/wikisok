@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { HYDRATE } from "next-redux-wrapper"
 import { AppState } from "./store"
 
 export enum THEME {
@@ -23,19 +22,8 @@ export const themeSlice = createSlice({
   name: "Theme",
   initialState,
   reducers: {
-
     setThemeState(state, action) {
       state.themeState = action.payload
-    },
-
-    // Special reducer for hydrating the state. Special case for next-redux-wrapper
-    extraReducers: {
-      [HYDRATE]: (state, action) => {
-        return {
-          ...state,
-          ...action.payload.Theme,
-        };
-      },
     },
   },
 })
