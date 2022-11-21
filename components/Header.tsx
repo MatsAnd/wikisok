@@ -1,5 +1,4 @@
 import { Button, useTheme } from "@geist-ui/core"
-import { Moon, Sun, Monitor } from "@geist-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { selectThemeState, setThemeState, THEME } from "../state/themeSlice";
 
