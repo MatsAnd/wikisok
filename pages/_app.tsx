@@ -1,5 +1,6 @@
-import { GeistProvider, CssBaseline } from '@geist-ui/core'
 import { useEffect, useState } from 'react'
+import { GeistProvider, CssBaseline } from '@geist-ui/core'
+import { Analytics } from '@vercel/analytics/react'
 import { useSelector } from "react-redux";
 import { wrapper } from '../state/store'
 import { selectThemeState, THEME } from "../state/themeSlice";
@@ -25,10 +26,13 @@ function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <GeistProvider themeType={theme === THEME.AUTO ? systemTheme : theme}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </GeistProvider>
+    <>
+      <Analytics />
+      <GeistProvider themeType={theme === THEME.AUTO ? systemTheme : theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </GeistProvider>
+    </>
   )
 }
 
