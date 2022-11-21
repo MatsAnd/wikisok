@@ -7,6 +7,7 @@ import { useDebounce } from '../hooks/useDebounce'
 import { fetcher } from '../lib/fetcher'
 import { Article } from '../components/Article'
 import { WIKI_URL } from '../config'
+import { WikiApiResponse } from '../types/WikiApi'
 
 const getAPIUrl = (searchString: string, limit = 25) => 
   `${WIKI_URL}w/api.php?action=query&origin=*&format=json&prop=extracts&exintro&explaintext&generator=search&gsrnamespace=0&gsrlimit=${limit}&gsrsearch=${encodeURIComponent(searchString)}`
@@ -15,7 +16,7 @@ export default function Home() {
   const [searchString, setSearchString] = useState('')
   const debouncedSearch = useDebounce(searchString, 500)
 
-  const { data, isValidating } = useSWR(
+  const { data, isValidating } = useSWR<WikiApiResponse>(
     () => debouncedSearch ? getAPIUrl(debouncedSearch) : null,
     fetcher
   )

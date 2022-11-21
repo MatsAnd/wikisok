@@ -1,22 +1,14 @@
 import { Fieldset, Link } from "@geist-ui/core"
 import { WIKI_URL } from "../config"
+import { WikiApiArticle } from "../types/WikiApi"
 import Skeleton from "./Skeleton/Skeleton"
 
-type SearchArticle = {
-    pageid: number, 
-    index: number,
-    ns: number, 
-    title: string, 
-    extract: string,
-}
-
 type ArticleProps = {
-    article: SearchArticle | undefined
+    article?: WikiApiArticle
 }
 
 export const Article = ({ article }: ArticleProps) => {
     const pageUrl = `${WIKI_URL}?curid=${article?.pageid}`
-    console.log(article)
 
     return (
         <Fieldset style={{marginBottom: "1em"}}>
