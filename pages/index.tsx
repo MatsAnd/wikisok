@@ -1,13 +1,12 @@
-import { useState } from 'react'
-import { Code, Display, Input, Link, Loading, Page, Text } from '@geist-ui/core'
+import React, { useState } from 'react'
 import Head from 'next/head'
-import Header from '../components/Header'
 import useSWR from 'swr'
+import { Code, Display, Input, Link, Page, Text } from '@geist-ui/core'
+import Header from '../components/Header'
 import { useDebounce } from '../hooks/useDebounce'
 import { fetcher } from '../lib/fetcher'
 import { Article } from '../components/Article'
 import { WIKI_URL } from '../config'
-
 
 const getAPIUrl = (searchString: string, limit = 25) => 
   `${WIKI_URL}w/api.php?action=query&origin=*&format=json&prop=extracts&exintro&explaintext&generator=search&gsrnamespace=0&gsrlimit=${limit}&gsrsearch=${encodeURIComponent(searchString)}`
@@ -43,27 +42,36 @@ export default function Home() {
             width="100%"
           />
            <Display width="100%">
-            {
-              isValidating 
-                ? <Loading />
-                : ""
-            }
+            <Text h3>
+              {
+                isValidating || data?.query?.pages 
+                  ? <>Søkeresulater for <Code classic>{debouncedSearch}</Code>:</>
+                  : debouncedSearch && !data?.query?.pages
+                    ? <>Ingen treff på <Code>{debouncedSearch}</Code> 😳</>
+                    : ""
+              }
+            </Text>
 
             {
-              data?.query?.pages
-                ? <>
-                    <Text h3>Søkeresulater for <Code classic>{debouncedSearch}</Code>:</Text>
-                    {
-                      Object.entries(data.query.pages).map(([key, article]) => {
-                        return <Article article={article} key={key} />
-                      })
-                    }
-                  </>
-                : !isValidating && debouncedSearch
-                  ? <Text h3>Ingen treff på <Code>{debouncedSearch}</Code> 😳</Text>
-                  : ""
+              isValidating && 
+                <>
+                  {
+                    Array.from(Array(4).keys()).map((key) => {
+                      return <Article key={key} />
+                    })
+                  }
+                </>
             }
-            
+            {
+              data?.query?.pages && 
+                <>
+                  {
+                    Object.entries(data.query.pages).map(([key, article]) => {
+                      return <Article article={article} key={key} />
+                    })
+                  }
+                </>
+            }            
           </Display>
         </Page.Content>
         <Page.Footer paddingBottom="1em">
