@@ -12,7 +12,7 @@
     "@geist-ui/core": "2.3.8",
     "@geist-ui/icons": "1.0.2",
     "@reduxjs/toolkit": "1.9.3",
-    "@types/node": "18.11.18",
+    "@types/node": "18.15.11",
     "@types/react": "18.0.34",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "0.1.6",
